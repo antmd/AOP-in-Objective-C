@@ -2,6 +2,9 @@
 //  AOPProxy.h  InnoliFoundation
 //  Created by Szilveszter Molnar on 1/7/11.  Copyright 2011 Innoli Kft. All rights reserved.
 
+typedef NS_ENUM(NSUInteger, InterceptionPoint){ InterceptPointStart, InterceptPointEnd};
+typedef void(^InterceptionBlock)(NSInvocation*,InterceptionPoint);
+
 /*!
 	@class	  AOPProxy
 	@abstract	The AOPProxy is a simple Aspect Oriented Programming like proxy.
@@ -33,6 +36,14 @@
 	for the invocation that was intercepted.
  */
 - (void) interceptMethodEndForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector;
+
+/*!
+ @method      interceptMethodForSelector:interceptorPoint:block:
+ @abstract    This method will cause the proxy to invoke the block for the selector at the point indicated by the insertion point.
+ @discussion  The interceptor block must take exactly two parameters, 
+              which will be NSInvocation instance for the invocation that was intercepted, and the insertion point.
+ */
+- (void) interceptMethodForSelector:(SEL)sel interceptorPoint:(InterceptionPoint)time block:(InterceptionBlock)block;
 
 // Override point for subclassers to implement different invoking behavior
 - (void) invokeOriginalMethod:(NSInvocation*)anInvocation;

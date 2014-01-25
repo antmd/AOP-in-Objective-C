@@ -58,10 +58,10 @@
 			isa = PBXGroup;
 			children = (
 				32A70AAB03705E1F00C91783 /* AOPLib_Prefix.pch */,
-				89875D4612DA46ED00D9CF7E /* AOPMethodLogger.m */,
 				89875D4712DA46ED00D9CF7E /* AOPProxy.h */,
 				89875D4812DA46ED00D9CF7E /* AOPProxy.m */,
 				89875D4A12DA46ED00D9CF7E /* AOPThreadInvoker.m */,
+				89875D4612DA46ED00D9CF7E /* AOPMethodLogger.m */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 				89875D5212DA470C00D9CF7E /* AOPLibTest.m */,
 			);
