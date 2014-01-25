@@ -6,6 +6,6 @@
 
 @interface AOPThreadInvoker : AOPProxy
 
-- (id)initWithInstance:(id)anObject thread:(NSThread *)aThread;
+- (id) initWithInstance:(id)anObject thread:(NSThread *)aThread;
 
 @end

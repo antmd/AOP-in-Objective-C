@@ -3,23 +3,20 @@
 //  Created by Szilveszter Molnar on 1/7/11.  Copyright 2011 Innoli Kft. All rights reserved.
 
 /*!
-	@class	   AOPProxy
+	@class	  AOPProxy
 	@abstract	The AOPProxy is a simple Aspect Oriented Programming like proxy.
  */
 @interface AOPProxy : NSProxy
-
 /*!
-	@method	 initWithInstance:
-	@abstract   Creates a new proxy with using the instance provided as the parameter.
+	@method   initWithInstance:
+	@abstract Creates a new proxy with using the instance provided as the parameter.
  */
 - (id)initWithInstance:(id)anObject;
-
 /*!
-	@method	 initWithNewInstanceOfClass:
-	@abstract   Creates a new proxy and forwards all calls to a new instance of the specified class
+	@method   initWithNewInstanceOfClass:
+	@abstract Creates a new proxy and forwards all calls to a new instance of the specified class
  */
 - (id)initWithNewInstanceOfClass:(Class) class;
-
 /*!
 	@method	 interceptMethodStartForSelector:withInterceptorTarget:interceptorSelector:
 	@abstract   This method will cause the proxy to invoke the interceptor selector on the interceptor
@@ -28,7 +25,6 @@
 		for the invocation that was intercepted.
  */
 - (void)interceptMethodStartForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector;
-
 /*!
  @method	 interceptMethodEndForSelector:withInterceptorTarget:interceptorSelector:
  @abstract   This method will cause the proxy to invoke the interceptor selector on the interceptor
@@ -39,6 +35,6 @@
 - (void)interceptMethodEndForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector;
 
 // Override point for subclassers to implement different invoking behavior
-- (void)invokeOriginalMethod:(NSInvocation *)anInvocation;
+- (void) invokeOriginalMethod:(NSInvocation*)anInvocation;
 
 @end

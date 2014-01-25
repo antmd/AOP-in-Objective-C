@@ -4,5 +4,4 @@
 
 #import "AOPProxy.h"
 
-@interface AOPMethodLogger : AOPProxy
-@end
+@interface AOPMethodLogger : AOPProxy @end

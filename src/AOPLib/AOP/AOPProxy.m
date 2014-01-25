@@ -3,7 +3,15 @@
 //  Created by Szilveszter Molnar on 1/7/11.  Copyright 2011 Innoli Kft. All rights reserved.
 
 #import "AOPProxy.h"
-#import "AOPInterceptorInfo.h"
+
+@interface AOPInterceptorInfo : NSObject
+@property(unsafe_unretained) id interceptorTarget;
+@property SEL interceptedSelector,
+              interceptorSelector;
+@end
+@implementation AOPInterceptorInfo
+@end
+
 
 @implementation AOPProxy { id parentObject;  NSMutableArray *methodStartInterceptors, *methodEndInterceptors; }
 
