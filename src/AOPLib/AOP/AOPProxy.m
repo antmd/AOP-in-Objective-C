@@ -1,177 +1,83 @@
-//
-//  AOPProxy.m
-//  InnoliFoundation
-//
-//  Created by Szilveszter Molnar on 1/7/11.
-//  Copyright 2011 Innoli Kft. All rights reserved.
-//
+
+//  AOPProxy.m  InnoliFoundation
+//  Created by Szilveszter Molnar on 1/7/11.  Copyright 2011 Innoli Kft. All rights reserved.
 
 #import "AOPProxy.h"
 #import "AOPInterceptorInfo.h"
 
-@implementation AOPProxy
+@implementation AOPProxy { id parentObject;  NSMutableArray *methodStartInterceptors, *methodEndInterceptors; }
 
 - (id) initWithInstance:(id)anObject {
-    
-    parentObject = [anObject retain];
 
-    methodStartInterceptors = [[NSMutableArray alloc] init];
-    methodEndInterceptors = [[NSMutableArray alloc] init];
-
-    return self;
+  parentObject            = anObject;
+  methodStartInterceptors = NSMutableArray.new;
+  methodEndInterceptors   = NSMutableArray.new;    return self;
 }
 
 - (id) initWithNewInstanceOfClass:(Class) class {
 
-    // create a new instance of the specified class
-    id newInstance = [[class alloc] init];
+  // create a new instance of the specified class
+  return self = [self initWithInstance:[class new]] ? self : nil;     // invoke my designated initializer
+}
+- (BOOL) isKindOfClass:     (Class)cls;       { return [parentObject isKindOfClass:cls];        }
+- (BOOL) conformsToProtocol:(Protocol*)proto  { return [parentObject conformsToProtocol:proto]; }
+- (BOOL) respondsToSelector:(SEL)sel          { return [parentObject respondsToSelector:sel];   }
 
-    // invoke my designated initializer
-    [self initWithInstance:newInstance];
-
-    // release the new instance
-    [newInstance release];
-
-    // finally return the configured self
-    return self;
+- (NSMethodSignature*) methodSignatureForSelector:(SEL)sel { return [parentObject methodSignatureForSelector:sel];
 }
 
-- (BOOL)isKindOfClass:(Class)aClass;
-{
-    return [parentObject isKindOfClass:aClass];
+- (void)interceptMethodStartForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector {
+
+  NSParameterAssert(target != nil);                   // make sure the target is not nil
+
+  AOPInterceptorInfo *info = AOPInterceptorInfo.new;  // create the interceptorInfo
+  info.interceptedSelector = sel;
+  info.interceptorTarget   = target;
+  info.interceptorSelector = selector;
+  [methodStartInterceptors addObject:info];           // add to our list
 }
 
-- (BOOL)conformsToProtocol:(Protocol *)aProtocol;
-{
-    return [parentObject conformsToProtocol:aProtocol];
+- (void)interceptMethodEndForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector {
+
+  NSParameterAssert(target != nil);                   // make sure the target is not nil
+
+  AOPInterceptorInfo *info  = AOPInterceptorInfo.new; // create the interceptorInfo
+  info.interceptedSelector  = sel;
+  info.interceptorTarget    = target;
+  info.interceptorSelector  = selector;
+  [methodEndInterceptors addObject:info];             // add to our list
 }
 
-- (BOOL)respondsToSelector:(SEL)aSelector;
-{
-    return [parentObject respondsToSelector:aSelector];
-}
+- (void)invokeOriginalMethod:(NSInvocation *)inv { [inv invoke]; }
 
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector;
-{
-    return [parentObject methodSignatureForSelector:aSelector];
-}
+- (void)forwardInvocation:(NSInvocation *)inv {
 
-- (void) interceptMethodStartForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector {
+  SEL aSelector = inv.selector;
+  if (![parentObject respondsToSelector:aSelector]) return;   // check if the parent object responds to the selector ...
+  inv.target = parentObject;
 
-    // make sure the target is not nil
-    NSParameterAssert( target != nil );
+  void (^invokeSelectors)(NSArray*) = ^(NSArray*interceptors){ @autoreleasepool {
+    // Intercept the start/end of the method, depending on passed array.
+    [interceptors enumerateObjectsUsingBlock:^(AOPInterceptorInfo *oneInfo, NSUInteger idx, BOOL *stop) {
+      if (oneInfo.interceptedSelector != aSelector) return;                 // first search for this selector ...
 
-    AOPInterceptorInfo *info = [[AOPInterceptorInfo alloc] init];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
-    // create the interceptorInfo
-    info.interceptedSelector = sel;
-    info.interceptorTarget = target;
-    info.interceptorSelector = selector;
+      [(NSObject*)oneInfo.interceptorTarget performSelector:oneInfo.interceptorSelector withObject:inv];
 
-    // add to our list
-    [methodStartInterceptors addObject:info];
+#pragma clang diagnostic pop
+      }];
+    }
+  };
 
-    [info release];
-}
-
-- (void) interceptMethodEndForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector {
-    
-    // make sure the target is not nil
-    NSParameterAssert( target != nil );
-    
-    AOPInterceptorInfo *info = [[AOPInterceptorInfo alloc] init];
-    
-    // create the interceptorInfo
-    info.interceptedSelector = sel;
-    info.interceptorTarget = target;
-    info.interceptorSelector = selector;
-    
-    // add to our list
-    [methodEndInterceptors addObject:info];
-    
-    [info release];
-}
-
-- (void) invokeOriginalMethod:(NSInvocation *)anInvocation {
-    [anInvocation invoke];
-}
-
-- (void)forwardInvocation:(NSInvocation *)anInvocation;
-{
-    SEL aSelector = [anInvocation selector];
-
-    // check if the parent object responds to the selector ...
-    if ( [parentObject respondsToSelector:aSelector] ) {
-
-        [anInvocation setTarget:parentObject];
-
-        //
-        // Intercept the start of the method.
-        //
-        
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-        for ( int i = 0; i < [methodStartInterceptors count]; i++ ) {
-
-            // first search for this selector ...
-            AOPInterceptorInfo *oneInfo = [methodStartInterceptors objectAtIndex:i];
-
-            if ( [oneInfo interceptedSelector] == aSelector ) {
-
-                // extract the interceptor info
-                id target = [oneInfo interceptorTarget];
-                SEL selector = [oneInfo interceptorSelector];
-
-                // finally invoke the interceptor
-                [(NSObject *) target performSelector:selector withObject:anInvocation];
-            }
-        }
-
-        [pool release];
-
-        //
-        // Invoke the original method ...
-        //
-        
-        [self invokeOriginalMethod:anInvocation];
-
-        
-        //
-        // Intercept the ending of the method.
-        //
-        
-        NSAutoreleasePool *pool2 = [[NSAutoreleasePool alloc] init];
-        
-        for ( int i = 0; i < [methodEndInterceptors count]; i++ ) {
-            
-            // first search for this selector ...
-            AOPInterceptorInfo *oneInfo = [methodEndInterceptors objectAtIndex:i];
-            
-            if ( [oneInfo interceptedSelector] == aSelector ) {
-                
-                // extract the interceptor info
-                id target = [oneInfo interceptorTarget];
-                SEL selector = [oneInfo interceptorSelector];
-                
-                // finally invoke the interceptor
-                [(NSObject *) target performSelector:selector withObject:anInvocation];
-            }
-        }
-        
-        [pool2 release];        
-    } 
-//    else {
-//        [super forwardInvocation:invocation];
-//    }
-}
-
-- (void) dealloc {
-    [parentObject release];
-    [methodStartInterceptors release];
-    [methodEndInterceptors release];
-
-    [super dealloc];
+  // Intercept the starting of the method.
+  invokeSelectors(methodStartInterceptors);
+  // Invoke the original method ...
+  [self invokeOriginalMethod:inv];
+   // Intercept the ending of the method.
+  invokeSelectors(methodEndInterceptors);
+  //	else { [super forwardInvocation:invocation]; }
 }
 
 @end
-

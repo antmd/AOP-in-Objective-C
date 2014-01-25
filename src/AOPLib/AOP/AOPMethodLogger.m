@@ -1,24 +1,18 @@
-//
-//  AOPMethodLogger.m
-//  InnoliFoundation
-//
-//  Created by Szilveszter Molnar on 1/7/11.
-//  Copyright 2011 Innoli Kft. All rights reserved.
-//
+
+//  AOPMethodLogger.m  InnoliFoundation
+//  Created by Szilveszter Molnar on 1/7/11.  Copyright 2011 Innoli Kft. All rights reserved.
 
 #import "AOPMethodLogger.h"
 
 @implementation AOPMethodLogger
 
-- (void) invokeOriginalMethod:(NSInvocation *)anInvocation {
-    SEL aSelector = [anInvocation selector];
+- (void)invokeOriginalMethod:(NSInvocation *)inv
+{
 
-    NSLog( @"Method START: %@", NSStringFromSelector(aSelector) );
-
-    [super invokeOriginalMethod:anInvocation];
-
-    NSLog( @"Method END: %@", NSStringFromSelector(aSelector) );
+    NSString *selString = NSStringFromSelector(inv.selector);
+    NSLog(@"Method START: %@", selString);
+    [super invokeOriginalMethod:inv];
+    NSLog(@"Method END: %@", selString);
 }
 
 @end
-
