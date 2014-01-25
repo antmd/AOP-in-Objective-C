@@ -11,7 +11,7 @@
 - (void) removeInterceptor:(NSInvocation*)i { NSLog(@"REMOVE END intercepted !"); }
 - (void) testAOP {
 
-  AOPProxy *testArray = [AOPProxy.alloc initWithNewInstanceOfClass:NSMutableArray.class];
+  AOPMethodLogger *testArray = [AOPMethodLogger instanceOfClass:NSMutableArray.class];
 
   [testArray interceptMethodStartForSelector:@selector(addObject:)
                                      withInterceptorTarget:self
@@ -23,6 +23,7 @@
 
   [(NSMutableArray*)testArray addObject:@1];
   [(NSMutableArray*)testArray removeObjectAtIndex:0];
+  [(NSArray*)testArray count];
 }
 
 @end

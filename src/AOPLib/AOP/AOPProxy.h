@@ -11,12 +11,12 @@
 	@method   initWithInstance:
 	@abstract Creates a new proxy with using the instance provided as the parameter.
  */
-- (id)initWithInstance:(id)anObject;
+- (id) initWithObject:(id)obj;
 /*!
 	@method   initWithNewInstanceOfClass:
 	@abstract Creates a new proxy and forwards all calls to a new instance of the specified class
  */
-- (id)initWithNewInstanceOfClass:(Class) class;
++ (id) instanceOfClass:(Class)cls;
 /*!
 	@method	 interceptMethodStartForSelector:withInterceptorTarget:interceptorSelector:
 	@abstract   This method will cause the proxy to invoke the interceptor selector on the interceptor
@@ -24,7 +24,7 @@
 	@discussion The interceptor selector must take exactly one parameter, which will be NSInvocation instance
 		for the invocation that was intercepted.
  */
-- (void)interceptMethodStartForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector;
+- (void) interceptMethodStartForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector;
 /*!
  @method	 interceptMethodEndForSelector:withInterceptorTarget:interceptorSelector:
  @abstract   This method will cause the proxy to invoke the interceptor selector on the interceptor
@@ -32,9 +32,17 @@
  @discussion The interceptor selector must take exactly one parameter, which will be NSInvocation instance
 	for the invocation that was intercepted.
  */
-- (void)interceptMethodEndForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector;
+- (void) interceptMethodEndForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector;
 
 // Override point for subclassers to implement different invoking behavior
 - (void) invokeOriginalMethod:(NSInvocation*)anInvocation;
 
 @end
+
+// Ready made cubclasses.
+
+@interface  AOPMethodLogger : AOPProxy              @end
+@interface AOPThreadInvoker : AOPProxy
+
+- (id) initWithInstance:(id)x thread:(NSThread*)t;  @end
+

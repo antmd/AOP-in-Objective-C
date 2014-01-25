@@ -28,11 +28,9 @@
 /* Begin PBXFileReference section */
 		32A70AAB03705E1F00C91783 /* AOPLib_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOPLib_Prefix.pch; sourceTree = "<group>"; };
 		6EB474D913F043D400597351 /* libAOPLibiPhone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAOPLibiPhone.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		89875D4512DA46ED00D9CF7E /* AOPMethodLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AOPMethodLogger.h; path = AOP/AOPMethodLogger.h; sourceTree = "<group>"; };
 		89875D4612DA46ED00D9CF7E /* AOPMethodLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AOPMethodLogger.m; path = AOP/AOPMethodLogger.m; sourceTree = "<group>"; };
 		89875D4712DA46ED00D9CF7E /* AOPProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AOPProxy.h; path = AOP/AOPProxy.h; sourceTree = "<group>"; };
 		89875D4812DA46ED00D9CF7E /* AOPProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AOPProxy.m; path = AOP/AOPProxy.m; sourceTree = "<group>"; };
-		89875D4912DA46ED00D9CF7E /* AOPThreadInvoker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AOPThreadInvoker.h; path = AOP/AOPThreadInvoker.h; sourceTree = "<group>"; };
 		89875D4A12DA46ED00D9CF7E /* AOPThreadInvoker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AOPThreadInvoker.m; path = AOP/AOPThreadInvoker.m; sourceTree = "<group>"; };
 		89875D5212DA470C00D9CF7E /* AOPLibTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOPLibTest.m; sourceTree = "<group>"; };
 		8DD76FA10486AA7600D96B5E /* AOPLib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AOPLib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,11 +58,9 @@
 			isa = PBXGroup;
 			children = (
 				32A70AAB03705E1F00C91783 /* AOPLib_Prefix.pch */,
-				89875D4512DA46ED00D9CF7E /* AOPMethodLogger.h */,
 				89875D4612DA46ED00D9CF7E /* AOPMethodLogger.m */,
 				89875D4712DA46ED00D9CF7E /* AOPProxy.h */,
 				89875D4812DA46ED00D9CF7E /* AOPProxy.m */,
-				89875D4912DA46ED00D9CF7E /* AOPThreadInvoker.h */,
 				89875D4A12DA46ED00D9CF7E /* AOPThreadInvoker.m */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 				89875D5212DA470C00D9CF7E /* AOPLibTest.m */,

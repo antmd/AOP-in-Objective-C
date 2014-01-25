@@ -5,34 +5,28 @@
 #import "AOPProxy.h"
 
 @interface AOPInterceptorInfo : NSObject
-@property(unsafe_unretained) id interceptorTarget;
+@property (unsafe_unretained) id interceptorTarget;
 @property SEL interceptedSelector,
               interceptorSelector;
 @end
-@implementation AOPInterceptorInfo
-@end
 
+@implementation AOPProxy { id parentObj;  NSMutableArray *methodStartInterceptors, *methodEndInterceptors; }
 
-@implementation AOPProxy { id parentObject;  NSMutableArray *methodStartInterceptors, *methodEndInterceptors; }
+-   (id) initWithObject:    (id)obj         {
 
-- (id) initWithInstance:(id)anObject {
-
-  parentObject            = anObject;
+  parentObj               = obj;
   methodStartInterceptors = NSMutableArray.new;
   methodEndInterceptors   = NSMutableArray.new;    return self;
 }
++   (id) instanceOfClass:   (Class)cls      {   // create a new instance of the specified class
 
-- (id) initWithNewInstanceOfClass:(Class) class {
-
-  // create a new instance of the specified class
-  return self = [self initWithInstance:[class new]] ? self : nil;     // invoke my designated initializer
+  return [self.alloc initWithObject:[cls new]] ?: nil;     // invoke my designated initializer
 }
-- (BOOL) isKindOfClass:     (Class)cls;       { return [parentObject isKindOfClass:cls];        }
-- (BOOL) conformsToProtocol:(Protocol*)proto  { return [parentObject conformsToProtocol:proto]; }
-- (BOOL) respondsToSelector:(SEL)sel          { return [parentObject respondsToSelector:sel];   }
+- (BOOL) isKindOfClass:     (Class)cls;     { return [parentObj isKindOfClass:cls];        }
+- (BOOL) conformsToProtocol:(Protocol*)prt  { return [parentObj conformsToProtocol:prt]; }
+- (BOOL) respondsToSelector:(SEL)sel        { return [parentObj respondsToSelector:sel];   }
 
-- (NSMethodSignature*) methodSignatureForSelector:(SEL)sel { return [parentObject methodSignatureForSelector:sel];
-}
+- (NSMethodSignature*) methodSignatureForSelector:(SEL)sel { return [parentObj methodSignatureForSelector:sel]; }
 
 - (void)interceptMethodStartForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector {
 
@@ -61,8 +55,8 @@
 - (void)forwardInvocation:(NSInvocation *)inv {
 
   SEL aSelector = inv.selector;
-  if (![parentObject respondsToSelector:aSelector]) return;   // check if the parent object responds to the selector ...
-  inv.target = parentObject;
+  if (![parentObj respondsToSelector:aSelector]) return;   // check if the parent object responds to the selector ...
+  inv.target = parentObj;
 
   void (^invokeSelectors)(NSArray*) = ^(NSArray*interceptors){ @autoreleasepool {
     // Intercept the start/end of the method, depending on passed array.
@@ -89,3 +83,5 @@
 }
 
 @end
+
+@implementation AOPInterceptorInfo @end
