@@ -12,17 +12,20 @@
 
 + (void) testAOP:(AOPProxy*)proxy {
 
-
   [proxy interceptMethodStartForSelector:@selector(addObject:)
-                       withInterceptorTarget:self
-                         interceptorSelector:@selector(addInterceptor:)];
+                   withInterceptorTarget:self
+                     interceptorSelector:@selector(addInterceptor:)];
 
   [proxy interceptMethodEndForSelector:@selector(removeObjectAtIndex:)
-                     withInterceptorTarget:self
-                       interceptorSelector:@selector(removeInterceptor:)];
+                 withInterceptorTarget:self
+                   interceptorSelector:@selector(removeInterceptor:)];
 
-  [proxy interceptMethodForSelector:@selector(count) interceptorPoint:InterceptPointStart block:^(NSInvocation *i, InterceptionPoint p) {
-      printf("**%s %s intercepted with custom interceptor!\n", NSStringFromSelector(i.selector).UTF8String, [p == InterceptPointStart ?@"START" :@"  END" UTF8String]);
+  [proxy interceptMethodForSelector:@selector(count)
+                   interceptorPoint:InterceptPointStart
+                              block:^(NSInvocation *i, InterceptionPoint p) {
+
+      printf("**%s %s intercepted with custom interceptor!\n", NSStringFromSelector(i.selector).UTF8String,
+                                                              (p == InterceptPointStart ?@"START" :@"  END").UTF8String);
   }];
 
   [(NSMutableArray*)proxy addObject:@1];

@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8DD76F960486AA7600D96B5E"
-               BuildableName = "AOPLib"
-               BlueprintName = "AOPLib"
-               ReferencedContainer = "container:AOPLib.xcodeproj">
+               BlueprintIdentifier = "6EB474D813F043D400597351"
+               BuildableName = "libAOProxy.a"
+               BlueprintName = "AOProxy (iOS)"
+               ReferencedContainer = "container:AOProxy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,15 +29,6 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8DD76F960486AA7600D96B5E"
-            BuildableName = "AOPLib"
-            BlueprintName = "AOPLib"
-            ReferencedContainer = "container:AOPLib.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -48,15 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8DD76F960486AA7600D96B5E"
-            BuildableName = "AOPLib"
-            BlueprintName = "AOPLib"
-            ReferencedContainer = "container:AOPLib.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -66,15 +48,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8DD76F960486AA7600D96B5E"
-            BuildableName = "AOPLib"
-            BlueprintName = "AOPLib"
-            ReferencedContainer = "container:AOPLib.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

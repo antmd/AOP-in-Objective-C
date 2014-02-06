@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6EB474D813F043D400597351"
-               BuildableName = "libAOPLibiPhone.a"
-               BlueprintName = "AOPLibiPhone"
-               ReferencedContainer = "container:AOPLib.xcodeproj">
+               BlueprintIdentifier = "7B34536A18A3148B00D28DF5"
+               BuildableName = "libAOProxy.a"
+               BlueprintName = "AOProxy (OSX)"
+               ReferencedContainer = "container:AOProxy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
