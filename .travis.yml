@@ -9,7 +9,7 @@ before_install:
   - brew install xctool --HEAD
   - sudo easy_install cpp-coveralls
 script:
-  - xctool -project 'AOPProxy.xcodeproj' -scheme 'AOPProxyTests' -sdk macosx10.9 -configuration Debug clean build test TEST_AFTER_BUILD=YES TEST_HOST= GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
+  - xctool -project 'AOPProxy.xcodeproj' -scheme 'AOPProxy (OSX)' -sdk macosx10.9 -configuration Debug clean build test TEST_AFTER_BUILD=YES TEST_HOST= GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
 after_success:
   - ./.coveralls.sh
 # xctool test ONLY_ACTIVE_ARCH=NO -project AOPProxy.xcodeproj -scheme "AOPProxy (OSX)"
