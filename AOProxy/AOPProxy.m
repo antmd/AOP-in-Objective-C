@@ -2,6 +2,7 @@
 /***  AOPProxy.m  InnoliFoundation  Created by Szilveszter Molnar on 1/7/11.  Copyright 2011 Innoli Kft. All rights reserved. */
 
 #import "AOPProxy.h"
+#import <objc/message.h>
 
 @interface       AOPInterceptorInfo : NSObject
 @property (unsafe_unretained)    id   interceptorTarget;
@@ -16,11 +17,12 @@
 
 @implementation AOPProxy { NSMutableArray * methodInterceptors; } @synthesize proxiedObject = _proxiedObject;
 
--           (id)           initWithObject:(id)obj     {
+-   (id)                   initWithObject:(id)obj     {
+
   return _proxiedObject = obj, methodInterceptors = @[].mutableCopy, self ?: nil;
 }
-+ (instancetype)          proxyWithObject:(id)obj     { return [self.class.alloc initWithObject:obj];   }
-+ (instancetype)           proxyWithClass:(Class)cls  { return [self.class proxyWithObject:[cls new]];  }
++   (id)                  proxyWithObject:(id)obj     { return [self.alloc initWithObject:obj];   }
++   (id)                   proxyWithClass:(Class)cls  { return [self proxyWithObject:[cls new]];  }
 
 - (BOOL)                    isKindOfClass:(Class)cls;     { return [_proxiedObject isKindOfClass:cls];      }
 - (BOOL)               conformsToProtocol:(Protocol*)prt  { return [_proxiedObject conformsToProtocol:prt]; }
@@ -29,39 +31,29 @@
 - (void)             invokeOriginalMethod:(NSInvocation*)inv { [inv invoke]; }
 - (void)                forwardInvocation:(NSInvocation*)inv {
 
-  SEL aSel = inv.selector;
-  if (![_proxiedObject respondsToSelector:aSel]) return;   // check if the parent object responds to the selector ...
+  if (![_proxiedObject respondsToSelector:inv.selector]) return;   // check if the parent object responds to the selector ...
   inv.target = _proxiedObject;
 
-  void (^invokeSelectors)(NSArray*) = ^(NSArray*interceptors){ @autoreleasepool {
-    // Intercept the start/end of the method, depending on passed array.
-    [interceptors enumerateObjectsUsingBlock:^(AOPInterceptorInfo *oneInfo, NSUInteger idx, BOOL *stop) {
+  void (^invokeSelectors)(NSArray*,InterceptionPoint) = ^(NSArray*interceptors,InterceptionPoint time){
 
-      if (oneInfo.block) return oneInfo.block(inv,oneInfo.point);  // first search for this selector ...
-//    if (oneInfo.interceptedSelector != aSelector) return;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    @autoreleasepool {  NSPredicate *pointPred = [NSPredicate predicateWithFormat:@"point == %@", @(time)];
 
-      [(NSObject*)oneInfo.interceptorTarget performSelector:oneInfo.interceptorSelector withObject:inv];
-
-#pragma clang diagnostic pop
-      }];
+      for (AOPInterceptorInfo *oneInfo in [interceptors filteredArrayUsingPredicate:pointPred])
+        (oneInfo.block) ? oneInfo.block(inv,oneInfo.point)  // first search for this selector ...
+                        : (void)objc_msgSend(oneInfo.interceptorTarget, oneInfo.interceptorSelector, inv);
     }
   };
 
-  NSArray *sameSelectors =  [methodInterceptors filteredArrayUsingPredicate: // Match only items with same selector!
-                            [NSPredicate predicateWithBlock:^BOOL(AOPInterceptorInfo*info, NSDictionary *x) {
-                              return info.interceptedSelector == aSel;  }]];
+  NSArray *sameSels = [methodInterceptors filteredArrayUsingPredicate: // Match only items with same selector!
+                                      [NSPredicate predicateWithBlock:^BOOL(id info, NSDictionary *x) {
+      return ((AOPInterceptorInfo*)info).interceptedSelector == inv.selector;
+  }]];
 
-  invokeSelectors([sameSelectors filteredArrayUsingPredicate:    // Intercept the starting of the method.
-                            [NSPredicate predicateWithFormat:@"point == %@", @(InterceptPointStart)]]);
+  invokeSelectors (sameSels, InterceptPointStart);    // Intercept the starting of the method.
 
   [self invokeOriginalMethod:inv];                               // Invoke the original method ...
 
-  invokeSelectors([sameSelectors filteredArrayUsingPredicate:    // Intercept the ending of the method.
-                            [NSPredicate predicateWithFormat:@"point == %@", @(InterceptPointEnd)]]);
-
-  //	else { [super forwardInvocation:invocation]; }
+  invokeSelectors (sameSels, InterceptPointEnd);
 }
 
 - (NSMethodSignature*) methodSignatureForSelector:(SEL)sel   { return [_proxiedObject methodSignatureForSelector:sel]; }
