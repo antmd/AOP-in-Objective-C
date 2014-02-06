@@ -1,4 +1,4 @@
-AOPProxy   [![Coverage Status](https://coveralls.io/repos/mralexgray/AOP-in-Objective-C/badge.png?branch=travis%2Bcoveralls)](https://coveralls.io/r/mralexgray/AOP-in-Objective-C?branch=travis%2Bcoveralls) [![Build Status](https://travis-ci.org/mralexgray/AOP-in-Objective-C.png?branch=travis+coveralls)](https://travis-ci.org/mralexgray/AOP-in-Objective-C)
+AOPProxy [![Build Status](https://travis-ci.org/mralexgray/AOP-in-Objective-C.png?branch=travis+coveralls)](https://travis-ci.org/mralexgray/AOP-in-Objective-C)  [![Coverage Status](https://coveralls.io/repos/mralexgray/AOP-in-Objective-C/badge.png?branch=travis%2Bcoveralls)](https://coveralls.io/r/mralexgray/AOP-in-Objective-C?branch=travis%2Bcoveralls)
 ====
 #### An _Aspect-Oriented proxy library_ written `Objective-C` (for iOS + OSX)
 
