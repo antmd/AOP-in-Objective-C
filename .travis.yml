@@ -7,7 +7,7 @@ before_install:
   - brew update
   - brew unlink xctool
   - brew install xctool --HEAD
-  - sudo pip install cpp-coveralls --use-mirrors
+  - sudo easy_install cpp-coveralls
 script:
   - xctool -project 'AOPProxy.xcodeproj' -scheme 'AOPProxyTests' -sdk macosx10.9 -configuration Debug clean build test TEST_AFTER_BUILD=YES TEST_HOST= GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
 after_success:
