@@ -51,6 +51,7 @@
 		7B34536B18A3148B00D28DF5 /* libAOPProxy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAOPProxy.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B34539D18A33CAD00D28DF5 /* AOPProxyTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AOPProxyTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B3453A718A33CAD00D28DF5 /* AOPProxyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AOPProxyTests.m; sourceTree = "<group>"; };
+		7B3453B018A351FC00D28DF5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		89875D4612DA46ED00D9CF7E /* AOPMethodLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AOPMethodLogger.m; path = AOProxy/AOPMethodLogger.m; sourceTree = "<group>"; };
 		89875D4712DA46ED00D9CF7E /* AOPProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AOPProxy.h; path = AOProxy/AOPProxy.h; sourceTree = "<group>"; };
 		89875D4812DA46ED00D9CF7E /* AOPProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AOPProxy.m; path = AOProxy/AOPProxy.m; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 		08FB7794FE84155DC02AAC07 /* AOPLib */ = {
 			isa = PBXGroup;
 			children = (
+				7B3453B018A351FC00D28DF5 /* README.md */,
 				89875D4712DA46ED00D9CF7E /* AOPProxy.h */,
 				89875D4812DA46ED00D9CF7E /* AOPProxy.m */,
 				89875D4A12DA46ED00D9CF7E /* AOPThreadInvoker.m */,
