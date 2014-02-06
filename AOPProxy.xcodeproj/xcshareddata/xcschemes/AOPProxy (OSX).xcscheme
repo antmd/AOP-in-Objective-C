@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7B34536A18A3148B00D28DF5"
-               BuildableName = "libAOProxy.a"
+               BuildableName = "libAOPProxy.a"
                BlueprintName = "AOPProxy (OSX)"
                ReferencedContainer = "container:AOPProxy.xcodeproj">
             </BuildableReference>
@@ -28,6 +28,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7B34539C18A33CAD00D28DF5"
+               BuildableName = "AOPProxyTests.octest"
+               BlueprintName = "AOPProxyTests"
+               ReferencedContainer = "container:AOPProxy.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
