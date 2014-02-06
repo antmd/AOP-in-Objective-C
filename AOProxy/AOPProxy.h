@@ -18,10 +18,12 @@ typedef void(^InterceptionBlock)(NSInvocation*inv,InterceptionPoint intPt);
 */
 - (id) initWithObject:(id)obj;
 
++ (instancetype) proxyWithObject:(id)obj;
+
 /*!   @method initWithNewInstanceOfClass:
     @abstract Creates a new proxy and forwards all calls to a new instance of the specified class
 */
-+ (id) instanceOfClass:(Class)cls;
++ (instancetype) proxyWithClass:(Class)cls;
 
 /*!   @method interceptMethodStartForSelector:withInterceptorTarget:interceptorSelector:
 	  @abstract This method will cause the proxy to invoke the interceptor selector

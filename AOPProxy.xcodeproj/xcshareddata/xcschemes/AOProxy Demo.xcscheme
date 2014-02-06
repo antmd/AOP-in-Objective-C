@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B34536A18A3148B00D28DF5"
-               BuildableName = "libAOProxy.a"
-               BlueprintName = "AOProxy (OSX)"
-               ReferencedContainer = "container:AOProxy.xcodeproj">
+               BlueprintIdentifier = "8DD76F960486AA7600D96B5E"
+               BuildableName = "AOProxy Demo"
+               BlueprintName = "AOPProxy Demo"
+               ReferencedContainer = "container:AOPProxy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8DD76F960486AA7600D96B5E"
+            BuildableName = "AOProxy Demo"
+            BlueprintName = "AOPProxy Demo"
+            ReferencedContainer = "container:AOPProxy.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -39,6 +48,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8DD76F960486AA7600D96B5E"
+            BuildableName = "AOProxy Demo"
+            BlueprintName = "AOPProxy Demo"
+            ReferencedContainer = "container:AOPProxy.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -48,6 +66,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8DD76F960486AA7600D96B5E"
+            BuildableName = "AOProxy Demo"
+            BlueprintName = "AOPProxy Demo"
+            ReferencedContainer = "container:AOPProxy.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

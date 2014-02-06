@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B34539418A3156E00D28DF5 /* libAOProxy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B34536B18A3148B00D28DF5 /* libAOProxy.a */; };
+		7B34539418A3156E00D28DF5 /* libAOPProxy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B34536B18A3148B00D28DF5 /* libAOPProxy.a */; };
 		7B34539518A315CB00D28DF5 /* AOPProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 89875D4812DA46ED00D9CF7E /* AOPProxy.m */; };
 		7B34539618A315CB00D28DF5 /* AOPThreadInvoker.m in Sources */ = {isa = PBXBuildFile; fileRef = 89875D4A12DA46ED00D9CF7E /* AOPThreadInvoker.m */; };
 		7B34539718A315CB00D28DF5 /* AOPMethodLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 89875D4612DA46ED00D9CF7E /* AOPMethodLogger.m */; };
 		7B34539818A315F400D28DF5 /* AOPProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 89875D4712DA46ED00D9CF7E /* AOPProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		89875D5312DA470C00D9CF7E /* AOProxyDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 89875D5212DA470C00D9CF7E /* AOProxyDemo.m */; };
+		89875D5312DA470C00D9CF7E /* AOPProxyDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 89875D5212DA470C00D9CF7E /* AOPProxyDemo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,14 +38,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6EB474D913F043D400597351 /* libAOProxy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAOProxy.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B34536B18A3148B00D28DF5 /* libAOProxy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAOProxy.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EB474D913F043D400597351 /* libAOPProxy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAOPProxy.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B34536B18A3148B00D28DF5 /* libAOPProxy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAOPProxy.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		89875D4612DA46ED00D9CF7E /* AOPMethodLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AOPMethodLogger.m; path = AOProxy/AOPMethodLogger.m; sourceTree = "<group>"; };
 		89875D4712DA46ED00D9CF7E /* AOPProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AOPProxy.h; path = AOProxy/AOPProxy.h; sourceTree = "<group>"; };
 		89875D4812DA46ED00D9CF7E /* AOPProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AOPProxy.m; path = AOProxy/AOPProxy.m; sourceTree = "<group>"; };
 		89875D4A12DA46ED00D9CF7E /* AOPThreadInvoker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AOPThreadInvoker.m; path = AOProxy/AOPThreadInvoker.m; sourceTree = "<group>"; };
-		89875D5212DA470C00D9CF7E /* AOProxyDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOProxyDemo.m; sourceTree = "<group>"; };
-		8DD76FA10486AA7600D96B5E /* AOProxy Demo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "AOProxy Demo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89875D5212DA470C00D9CF7E /* AOPProxyDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOPProxyDemo.m; sourceTree = "<group>"; };
+		8DD76FA10486AA7600D96B5E /* AOPProxy Demo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "AOPProxy Demo"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B34539418A3156E00D28DF5 /* libAOProxy.a in Frameworks */,
+				7B34539418A3156E00D28DF5 /* libAOPProxy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +82,7 @@
 				89875D4A12DA46ED00D9CF7E /* AOPThreadInvoker.m */,
 				89875D4612DA46ED00D9CF7E /* AOPMethodLogger.m */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
-				89875D5212DA470C00D9CF7E /* AOProxyDemo.m */,
+				89875D5212DA470C00D9CF7E /* AOPProxyDemo.m */,
 			);
 			name = AOPLib;
 			sourceTree = "<group>";
@@ -90,9 +90,9 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DD76FA10486AA7600D96B5E /* AOProxy Demo */,
-				6EB474D913F043D400597351 /* libAOProxy.a */,
-				7B34536B18A3148B00D28DF5 /* libAOProxy.a */,
+				8DD76FA10486AA7600D96B5E /* AOPProxy Demo */,
+				6EB474D913F043D400597351 /* libAOPProxy.a */,
+				7B34536B18A3148B00D28DF5 /* libAOPProxy.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,9 +118,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		6EB474D813F043D400597351 /* AOProxy (iOS) */ = {
+		6EB474D813F043D400597351 /* AOPProxy (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6EB474E513F043D400597351 /* Build configuration list for PBXNativeTarget "AOProxy (iOS)" */;
+			buildConfigurationList = 6EB474E513F043D400597351 /* Build configuration list for PBXNativeTarget "AOPProxy (iOS)" */;
 			buildPhases = (
 				6EB474D513F043D400597351 /* Sources */,
 				6EB474D613F043D400597351 /* Frameworks */,
@@ -130,14 +130,14 @@
 			);
 			dependencies = (
 			);
-			name = "AOProxy (iOS)";
+			name = "AOPProxy (iOS)";
 			productName = AOPLibiPhone;
-			productReference = 6EB474D913F043D400597351 /* libAOProxy.a */;
+			productReference = 6EB474D913F043D400597351 /* libAOPProxy.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		7B34536A18A3148B00D28DF5 /* AOProxy (OSX) */ = {
+		7B34536A18A3148B00D28DF5 /* AOPProxy (OSX) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B34538C18A3148C00D28DF5 /* Build configuration list for PBXNativeTarget "AOProxy (OSX)" */;
+			buildConfigurationList = 7B34538C18A3148C00D28DF5 /* Build configuration list for PBXNativeTarget "AOPProxy (OSX)" */;
 			buildPhases = (
 				7B34536718A3148B00D28DF5 /* Sources */,
 				7B34536818A3148B00D28DF5 /* Frameworks */,
@@ -147,14 +147,14 @@
 			);
 			dependencies = (
 			);
-			name = "AOProxy (OSX)";
+			name = "AOPProxy (OSX)";
 			productName = AOProxy;
-			productReference = 7B34536B18A3148B00D28DF5 /* libAOProxy.a */;
+			productReference = 7B34536B18A3148B00D28DF5 /* libAOPProxy.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		8DD76F960486AA7600D96B5E /* AOProxy Demo */ = {
+		8DD76F960486AA7600D96B5E /* AOPProxy Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "AOProxy Demo" */;
+			buildConfigurationList = 1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "AOPProxy Demo" */;
 			buildPhases = (
 				8DD76F990486AA7600D96B5E /* Sources */,
 				8DD76F9B0486AA7600D96B5E /* Frameworks */,
@@ -165,10 +165,10 @@
 			dependencies = (
 				7B34539318A3155C00D28DF5 /* PBXTargetDependency */,
 			);
-			name = "AOProxy Demo";
+			name = "AOPProxy Demo";
 			productInstallPath = "$(HOME)/bin";
 			productName = AOPLib;
-			productReference = 8DD76FA10486AA7600D96B5E /* AOProxy Demo */;
+			productReference = 8DD76FA10486AA7600D96B5E /* AOPProxy Demo */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -179,7 +179,7 @@
 			attributes = {
 				LastUpgradeCheck = 0410;
 			};
-			buildConfigurationList = 1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "AOProxy" */;
+			buildConfigurationList = 1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "AOPProxy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -194,9 +194,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8DD76F960486AA7600D96B5E /* AOProxy Demo */,
-				6EB474D813F043D400597351 /* AOProxy (iOS) */,
-				7B34536A18A3148B00D28DF5 /* AOProxy (OSX) */,
+				8DD76F960486AA7600D96B5E /* AOPProxy Demo */,
+				6EB474D813F043D400597351 /* AOPProxy (iOS) */,
+				7B34536A18A3148B00D28DF5 /* AOPProxy (OSX) */,
 			);
 		};
 /* End PBXProject section */
@@ -223,7 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89875D5312DA470C00D9CF7E /* AOProxyDemo.m in Sources */,
+				89875D5312DA470C00D9CF7E /* AOPProxyDemo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +232,7 @@
 /* Begin PBXTargetDependency section */
 		7B34539318A3155C00D28DF5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7B34536A18A3148B00D28DF5 /* AOProxy (OSX) */;
+			target = 7B34536A18A3148B00D28DF5 /* AOPProxy (OSX) */;
 			targetProxy = 7B34539218A3155C00D28DF5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -247,7 +247,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "AOPProxy Demo";
 			};
 			name = Debug;
 		};
@@ -258,7 +258,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "AOPProxy Demo";
 			};
 			name = Release;
 		};
@@ -268,7 +268,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				ONLY_ACTIVE_ARCH = YES;
-				PUBLIC_HEADERS_FOLDER_PATH = include;
+				PUBLIC_HEADERS_FOLDER_PATH = build;
 			};
 			name = Debug;
 		};
@@ -276,7 +276,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				PUBLIC_HEADERS_FOLDER_PATH = include;
+				PUBLIC_HEADERS_FOLDER_PATH = build;
 			};
 			name = Release;
 		};
@@ -287,7 +287,7 @@
 				COPY_PHASE_STRIP = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = AOProxy;
+				PRODUCT_NAME = AOPProxy;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -299,7 +299,7 @@
 				COPY_PHASE_STRIP = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = AOProxy;
+				PRODUCT_NAME = AOPProxy;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -308,7 +308,6 @@
 		7B34538D18A3148C00D28DF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -335,7 +334,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = AOProxy;
+				PRODUCT_NAME = AOPProxy;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -343,7 +342,6 @@
 		7B34538E18A3148C00D28DF5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -366,7 +364,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = AOProxy;
+				PRODUCT_NAME = AOPProxy;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -374,7 +372,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "AOProxy Demo" */ = {
+		1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "AOPProxy Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB927508733DD40010E9CD /* Debug */,
@@ -383,7 +381,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "AOProxy" */ = {
+		1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "AOPProxy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB927908733DD40010E9CD /* Debug */,
@@ -392,7 +390,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6EB474E513F043D400597351 /* Build configuration list for PBXNativeTarget "AOProxy (iOS)" */ = {
+		6EB474E513F043D400597351 /* Build configuration list for PBXNativeTarget "AOPProxy (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6EB474E313F043D400597351 /* Debug */,
@@ -401,7 +399,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B34538C18A3148C00D28DF5 /* Build configuration list for PBXNativeTarget "AOProxy (OSX)" */ = {
+		7B34538C18A3148C00D28DF5 /* Build configuration list for PBXNativeTarget "AOPProxy (OSX)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B34538D18A3148C00D28DF5 /* Debug */,

@@ -3,67 +3,31 @@
 
 #import "AOPProxy.h"
 
-@interface      AOPInterceptorInfo : NSObject
-@property (unsafe_unretained)   id   interceptorTarget;
-@property (copy) InterceptionBlock   block;
-@property        InterceptionPoint   point;
-@property                      SEL   interceptedSelector,
-                                     interceptorSelector;
+@interface       AOPInterceptorInfo : NSObject
+@property (unsafe_unretained)    id   interceptorTarget;
+@property (copy)  InterceptionBlock   block;
+@property         InterceptionPoint   point;
+@property                       SEL   interceptedSelector,
+                                      interceptorSelector;
++ (instancetype) forSelector:(SEL)interceptedSel  target:(id)target
+                withSelector:(SEL)interceptorSel atPoint:(InterceptionPoint)point
+                                                   block:(InterceptionBlock)block;
 @end
 
-@implementation AOPProxy { NSMutableArray *methodInterceptors; } @synthesize  proxiedObject = _proxiedObject;
+@implementation AOPProxy { NSMutableArray * methodInterceptors; } @synthesize proxiedObject = _proxiedObject;
 
--   (id) initWithObject:    (id)obj         {
-
-  _proxiedObject     = obj;
-  methodInterceptors = @[].mutableCopy;
-  return self;
+-           (id)           initWithObject:(id)obj     {
+  return _proxiedObject = obj, methodInterceptors = @[].mutableCopy, self ?: nil;
 }
-+   (id) instanceOfClass:   (Class)cls      {   // create a new instance of the specified class
++ (instancetype)          proxyWithObject:(id)obj     { return [self.class.alloc initWithObject:obj];   }
++ (instancetype)           proxyWithClass:(Class)cls  { return [self.class proxyWithObject:[cls new]];  }
 
-  return [self.alloc initWithObject:[cls new]] ?: nil;     // invoke my designated initializer
-}
-- (BOOL) isKindOfClass:     (Class)cls;     { return [_proxiedObject isKindOfClass:cls];        }
-- (BOOL) conformsToProtocol:(Protocol*)prt  { return [_proxiedObject conformsToProtocol:prt];   }
-- (BOOL) respondsToSelector:(SEL)sel        { return [_proxiedObject respondsToSelector:sel];   }
+- (BOOL)                    isKindOfClass:(Class)cls;     { return [_proxiedObject isKindOfClass:cls];      }
+- (BOOL)               conformsToProtocol:(Protocol*)prt  { return [_proxiedObject conformsToProtocol:prt]; }
+- (BOOL)               respondsToSelector:(SEL)sel        { return [_proxiedObject respondsToSelector:sel]; }
 
-- (void) interceptMethodForSelector:(SEL)sel interceptorPoint:(InterceptionPoint)time block:(InterceptionBlock)block {
-
-  NSParameterAssert(block != NULL);                   // make sure the target is not nil
-
-  AOPInterceptorInfo *info = AOPInterceptorInfo.new;  // create the interceptorInfo
-  info.interceptedSelector = sel;
-  info.interceptorTarget   = NULL;
-  info.point               = time;
-  info.block               = block;
-  [methodInterceptors addObject:info];                 // add to our list
-
-}
-
-- (void) interceptMethodStartForSelector:(SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector {
-
-  NSParameterAssert(target != nil);                   // make sure the target is not nil
-
-  AOPInterceptorInfo *info = AOPInterceptorInfo.new;  // create the interceptorInfo
-  info.interceptedSelector = sel;
-  info.interceptorTarget   = target;
-  info.interceptorSelector = selector;
-  info.point               = InterceptPointStart;
-  [methodInterceptors addObject:info];           // add to our list
-}
-- (void) interceptMethodEndForSelector:  (SEL)sel withInterceptorTarget:(id)target interceptorSelector:(SEL)selector {
-
-  NSParameterAssert(target != nil);                   // make sure the target is not nil
-
-  AOPInterceptorInfo *info  = AOPInterceptorInfo.new; // create the interceptorInfo
-  info.interceptedSelector  = sel;
-  info.interceptorTarget    = target;
-  info.interceptorSelector  = selector;
-  info.point                = InterceptPointEnd;
-  [methodInterceptors addObject:info];             // add to our list
-}
-- (void) invokeOriginalMethod:(NSInvocation*)inv           { [inv invoke]; }
-- (void) forwardInvocation:   (NSInvocation*)inv           {
+- (void)             invokeOriginalMethod:(NSInvocation*)inv { [inv invoke]; }
+- (void)                forwardInvocation:(NSInvocation*)inv {
 
   SEL aSel = inv.selector;
   if (![_proxiedObject respondsToSelector:aSel]) return;   // check if the parent object responds to the selector ...
@@ -99,8 +63,49 @@
 
   //	else { [super forwardInvocation:invocation]; }
 }
-- (NSMethodSignature*) methodSignatureForSelector:(SEL)sel { return [_proxiedObject methodSignatureForSelector:sel]; }
 
+- (NSMethodSignature*) methodSignatureForSelector:(SEL)sel   { return [_proxiedObject methodSignatureForSelector:sel]; }
+
+- (void)       interceptMethodForSelector:(SEL)sel
+                         interceptorPoint:(InterceptionPoint)time
+                                    block:(InterceptionBlock)block {
+
+  NSParameterAssert(block != NULL);                     // make sure the target is not nil
+  [methodInterceptors addObject:[AOPInterceptorInfo forSelector:sel  target:NULL
+                                                  withSelector:NULL atPoint:time block:block]];
+}
+- (void)  interceptMethodStartForSelector:(SEL)sel
+                    withInterceptorTarget:(id)target
+                      interceptorSelector:(SEL)selector            {
+
+  NSParameterAssert(target != nil);                               // make sure the target is not nil
+  [methodInterceptors addObject:
+    [AOPInterceptorInfo forSelector:sel target:target             // create the interceptorInfo + add to our list
+                       withSelector:selector atPoint:InterceptPointStart block:NULL]];
+
+}
+- (void)    interceptMethodEndForSelector:(SEL)sel
+                    withInterceptorTarget:(id)target
+                      interceptorSelector:(SEL)selector            {
+
+  NSParameterAssert(target != nil);                   // make sure the target is not nil
+
+  [methodInterceptors addObject:
+    [AOPInterceptorInfo forSelector:sel target:target             // create the interceptorInfo + add to our list
+                       withSelector:selector atPoint:InterceptPointEnd block:NULL]];
+}
 @end
 
-@implementation AOPInterceptorInfo @end
+@implementation AOPInterceptorInfo
++ (instancetype) forSelector:(SEL)interceptedSel  target:(id)target
+                withSelector:(SEL)interceptorSel atPoint:(InterceptionPoint)point
+                                                   block:(InterceptionBlock)block {
+  AOPInterceptorInfo * x  = self.new;
+  x.point                 = point;
+  x.interceptedSelector   = interceptedSel;
+  if (target)         x.interceptorTarget   = target;
+  if (interceptorSel) x.interceptorSelector = interceptorSel;
+  if (block)          x.block               = block;
+  return x;
+}
+@end

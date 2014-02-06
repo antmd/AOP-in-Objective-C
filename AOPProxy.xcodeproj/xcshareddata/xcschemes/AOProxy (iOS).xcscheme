@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6EB474D813F043D400597351"
                BuildableName = "libAOProxy.a"
-               BlueprintName = "AOProxy (iOS)"
-               ReferencedContainer = "container:AOProxy.xcodeproj">
+               BlueprintName = "AOPProxy (iOS)"
+               ReferencedContainer = "container:AOPProxy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
