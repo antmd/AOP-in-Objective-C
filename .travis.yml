@@ -1,4 +1,7 @@
 language: objective-c
+branches:
+  only:
+    - travis+coveralls
 before_install:
   - sudo easy_install cpp-coveralls
   - brew uninstall xctool
