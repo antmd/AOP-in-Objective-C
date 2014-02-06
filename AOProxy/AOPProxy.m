@@ -1,7 +1,7 @@
 
 /***  AOPProxy.m  InnoliFoundation  Created by Szilveszter Molnar on 1/7/11.  Copyright 2011 Innoli Kft. All rights reserved. */
 
-#import "AOPProxy.h"
+#import <AOPProxy.h>
 #import <objc/message.h>
 
 @interface       AOPInterceptorInfo : NSObject
@@ -35,19 +35,15 @@
   inv.target = _proxiedObject;
 
   void (^invokeSelectors)(NSArray*,InterceptionPoint) = ^(NSArray*interceptors,InterceptionPoint time){
-
-    @autoreleasepool {  NSPredicate *pointPred = [NSPredicate predicateWithFormat:@"point == %@", @(time)];
-
-      for (AOPInterceptorInfo *oneInfo in [interceptors filteredArrayUsingPredicate:pointPred])
-        (oneInfo.block) ? oneInfo.block(inv,oneInfo.point)  // first search for this selector ...
-                        : (void)objc_msgSend(oneInfo.interceptorTarget, oneInfo.interceptorSelector, inv);
-    }
+    NSPredicate *pointPred = [NSPredicate predicateWithFormat:@"point == %@", @(time)];
+    for (AOPInterceptorInfo *oneInfo in [interceptors filteredArrayUsingPredicate:pointPred])
+      (oneInfo.block) ? oneInfo.block(inv,oneInfo.point)  // first search for this selector ...
+                      : (void)objc_msgSend(oneInfo.interceptorTarget, oneInfo.interceptorSelector, inv);
   };
-
-  NSArray *sameSels = [methodInterceptors filteredArrayUsingPredicate: // Match only items with same selector!
-                                      [NSPredicate predicateWithBlock:^BOOL(id info, NSDictionary *x) {
+  NSPredicate * selectorPred = [NSPredicate predicateWithBlock:^BOOL(id info, NSDictionary *x) {
       return ((AOPInterceptorInfo*)info).interceptedSelector == inv.selector;
-  }]];
+  }];
+  NSArray *sameSels = [methodInterceptors filteredArrayUsingPredicate:selectorPred]; // Match only items with same selector!
 
   invokeSelectors (sameSels, InterceptPointStart);    // Intercept the starting of the method.
 

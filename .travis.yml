@@ -2,7 +2,7 @@
 language: objective-c
 branches:
   only:
-    - travis+coveralls
+    - travis-coveralls
 before_install:
   - brew update
   - brew unlink xctool
@@ -11,8 +11,9 @@ before_install:
 script:
   - xctool -project 'AOPProxy.xcodeproj' -scheme 'AOPProxy (OSX)' -sdk macosx10.9 -configuration Debug clean build test TEST_AFTER_BUILD=YES TEST_HOST= GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
 after_success:
-  - ./.coveralls.rb -e AOPProxyTests.m
+  - ruby .coveralls.rb -x "m" -h 
 
+# -e AOPProxyTests.m
 # xctool test ONLY_ACTIVE_ARCH=NO -project AOPProxy.xcodeproj -scheme "AOPProxy (OSX)"
 # after_success:
 #   - coveralls -e BlockInjectionTest/Tests
