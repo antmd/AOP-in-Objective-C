@@ -11,6 +11,8 @@ typedef void(^InterceptionBlock)(NSInvocation*inv,InterceptionPoint intPt);
 */
 @interface AOPProxy : NSProxy
 
+@property (readonly) id proxiedObject;
+
 /*!   @method initWithInstance:
   	@abstract Creates a new proxy that will act on the provided object instance.
 */
