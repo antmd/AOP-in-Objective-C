@@ -1,11 +1,14 @@
+[![Coverage Status] (https://coveralls.io/repos/mralexgray/AOP-in-Objective-C/badge.png?branch=travis-coveralls)] (https://coveralls.io/r/mralexgray/AOP-in-Objective-C?branch=travis-coveralls)
+
+[![Build Status] (https://travis-ci.org/mralexgray/AOP-in-Objective-C.png?branch=travis-coveralls)]
+(https://travis-ci.org/mralexgray/AOP-in-Objective-C)
+
 AOPProxy
-====
+==================
 
 #### An _Aspect-Oriented proxy library_ written `Objective-C` (for iOS + OSX)
 
-[![Build Status](https://travis-ci.org/mralexgray/AOP-in-Objective-C.png?branch=travis+coveralls)](https://travis-ci.org/mralexgray/AOP-in-Objective-C)  
 
-[![Coverage Status](https://coveralls.io/repos/mralexgray/AOP-in-Objective-C/badge.png?branch=travis%2Bcoveralls)](https://coveralls.io/r/mralexgray/AOP-in-Objective-C?branch=travis%2Bcoveralls)
 
 This library enables functionality similar to AOP or _Aspect Oriented Programming_ - for Objective-C.
 Proxy classes can be created (by wrapping the original instances in an instance of AOPProxy) that
@@ -27,17 +30,17 @@ A simple example...
 - (void) removeInterceptor:(NSInvocation*)i { NSLog(@"REMOVE END intercepted!"); }
 
 - (void) testAOP {
- 
+
     NSMutableArray* testArray = [AOPProxy proxyWithClass:NSMutableArray.class];
-    
+
     [(id)testArray interceptMethodStartForSelector:@selector(addObject:)
                              withInterceptorTarget:self
                                interceptorSelector:@selector( addInterceptor: )];
-    
+
     [(id)testArray interceptMethodEndForSelector:@selector(removeObjectAtIndex:)
                            withInterceptorTarget:self
                              interceptorSelector:@selector( removeInterceptor: )];
-    
+
     [testArray addObject:@(1)];
     [testArray removeObjectAtIndex:0];
 }
