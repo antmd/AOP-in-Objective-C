@@ -6,6 +6,30 @@
 typedef NS_ENUM(NSUInteger, InterceptionPoint){ InterceptPointStart, InterceptPointEnd };
 typedef void(^InterceptionBlock)(NSInvocation*inv,InterceptionPoint intPt);
 
+@interface NSObject (AOPProxy)
+/*!          Returns a readonly property with an associated proxy, if any.
+ @discussion Instead of creating a AOProxy WITH an object, we'll create one ON the object.  
+             Instead of calling the AOProxy methods ON the "proxied object", you can SELECTIVELY call them on the PROXY.
+             Useful if you just wanna proxy SOME of the time!
+             The return type of `instancetype` obviates the need to cast the proxy property when calling methods, ie.
+                [someObject.proxy someMethodInSomeObjectClass]; <- works without casting the caller (if someObject responds to the method.
+*/
+- (instancetype) proxy;
+
+/*!  @method interceptMethodForSelector:(SEL)sel interceptorPoint:(InterceptionPoint)time block:(InterceptionBlock)block;
+   @abstract Same as the AOPProxy method, but available on ANY NSObject.  This method will make a proxy available on the object's
+             proxy property with a interceptor as described in this method's signature, or add this interceptor to the existing object's proxy.
+        @see proxy
+*/
+- (void) interceptMethodForSelector:(SEL)sel interceptorPoint:(InterceptionPoint)time block:(InterceptionBlock)block;
+
+/*!  @method invokeProxiedOriginalMethod:
+   @abstract Just calls the proxy method invokeOriginalMethod, but obviates the need to cast the caller.
+        @see [AOPProxy invokeOriginalMethod]
+*/
+- (void) invokeProxiedOriginalMethod:(NSInvocation*)i;
+@end
+
 /*!  	 @class AOPProxy
 	  @abstract	The AOPProxy is a simple Aspect Oriented Programming-like proxy.
 */

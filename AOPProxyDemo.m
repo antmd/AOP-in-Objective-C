@@ -5,7 +5,7 @@
 
 @interface    AOPProxyDemo : NSObject  + (void) testProxy:(id)proxy;
 @property   NSMutableArray * strongProperty;
-@property               id   proxy;
+@property               id   retainedProxy;
 @end
 
 int main(int c, char *v[]) { @autoreleasepool {
@@ -21,10 +21,10 @@ int main(int c, char *v[]) { @autoreleasepool {
 
 -   (id) init { return self = super.init ?
 
-  [ _proxy = [AOPMethodLogger proxyWithObject:_strongProperty = NSMutableArray.new]
-                  interceptMethodForSelector:@selector(addObjectsFromArray:)
-                            interceptorPoint:InterceptPointEnd
-                                       block:^(NSInvocation *inv, InterceptionPoint intPt) {
+  [ _retainedProxy = [AOPMethodLogger proxyWithObject:_strongProperty = NSMutableArray.new]
+                           interceptMethodForSelector:@selector(addObjectsFromArray:)
+                                     interceptorPoint:InterceptPointEnd
+                                               block:^(NSInvocation *inv, InterceptionPoint intPt) {
     printInvocation(inv, intPt);
 
   }], self : nil;
@@ -51,7 +51,7 @@ int main(int c, char *v[]) { @autoreleasepool {
   [(id)proxy                      addObject:@1];
   [(id)proxy             removeObjectAtIndex:0];
   [(id)proxy                             count];
-  [retainer.proxy addObjectsFromArray:@[@2,@3]];
+  [retainer.retainedProxy addObjectsFromArray:@[@2,@3]];
 }
 
 void printInvocation(NSInvocation*i, InterceptionPoint p) { // Logger
