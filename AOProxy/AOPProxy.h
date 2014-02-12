@@ -14,7 +14,7 @@ typedef void(^InterceptionBlock)(NSInvocation*inv,InterceptionPoint intPt);
              The return type of `instancetype` obviates the need to cast the proxy property when calling methods, ie.
                 [someObject.proxy someMethodInSomeObjectClass]; <- works without casting the caller (if someObject responds to the method.
 */
-- (instancetype) proxy;
+- (instancetype) ao_proxy;
 
 /*!  @method interceptMethodForSelector:(SEL)sel interceptorPoint:(InterceptionPoint)time block:(InterceptionBlock)block;
    @abstract Same as the AOPProxy method, but available on ANY NSObject.  This method will make a proxy available on the object's
@@ -24,7 +24,7 @@ typedef void(^InterceptionBlock)(NSInvocation*inv,InterceptionPoint intPt);
 - (void) interceptMethodForSelector:(SEL)sel interceptorPoint:(InterceptionPoint)time block:(InterceptionBlock)block;
 
 /*!  @method invokeProxiedOriginalMethod:
-   @abstract Just calls the proxy method invokeOriginalMethod, but obviates the need to cast the caller.
+   @abstract Just calls the ao_proxy method invokeOriginalMethod, but obviates the need to cast the caller.
         @see [AOPProxy invokeOriginalMethod]
 */
 - (void) invokeProxiedOriginalMethod:(NSInvocation*)i;

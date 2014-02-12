@@ -8,13 +8,13 @@
 @implementation NSObject (AOPProxy)
 - (void) invokeProxiedOriginalMethod:(NSInvocation*)i { if ([self respondsToSelector:@selector(invokeOriginalMethod:)]) [(AOPProxy*)self invokeOriginalMethod:i]; }
 
-- (instancetype) proxy { return objc_getAssociatedObject(self, _cmd); }
+- (instancetype) ao_proxy { return objc_getAssociatedObject(self, _cmd); }
 
 - (void) interceptMethodForSelector:(SEL)sel interceptorPoint:(InterceptionPoint)time block:(InterceptionBlock)block{
 
-  AOPProxy *prx  = self.proxy ?: [AOPProxy proxyWithObject:self];
+  AOPProxy *prx  = self.ao_proxy ?: [AOPProxy proxyWithObject:self];
   [prx interceptMethodForSelector:sel interceptorPoint:time block:block];
-  objc_setAssociatedObject(self, @selector(proxy), prx, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+  objc_setAssociatedObject(self, @selector(ao_proxy), prx, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 @end
 

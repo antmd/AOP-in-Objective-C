@@ -62,13 +62,13 @@
 
     NSString *faker = @"Konnichiwa";  /* we fudge the arguements. in essence, we lie. */
     [inv setArgument:&faker atIndex:0];
-    [_testString.proxy invokeProxiedOriginalMethod:inv];
+    [_testString.ao_proxy invokeProxiedOriginalMethod:inv];
   }];
 
    STAssertTrue ( [_testString isEqualToString:@"apple"], @"Although we added proxy, original should STILL return apple.");
   STAssertFalse ( [_testString isEqualToString:@"IBM"], @"original object is NOT IBM");
-  STAssertFalse ( [_testString.proxy isEqualToString:@"apple"], @"Our proxy is a trickster"); /* we checked @"Konnichiwa", not apple, inside the proxy */
-   STAssertTrue ( [_testString.proxy isEqualToString:@"Konnichiwa"], @"Take that, bitches");
+  STAssertFalse ( [_testString.ao_proxy isEqualToString:@"apple"], @"Our proxy is a trickster"); /* we checked @"Konnichiwa", not apple, inside the proxy */
+   STAssertTrue ( [_testString.ao_proxy isEqualToString:@"Konnichiwa"], @"Take that, bitches");
 
 }
 @end
